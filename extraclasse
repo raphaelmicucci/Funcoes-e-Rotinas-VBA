@@ -1,0 +1,118 @@
+Option Explicit
+Function Mes(fim) As String
+
+If fim = 0 Then
+    Mes = "dezembro"
+ElseIf fim = 1 Then
+    Mes = "abril"
+ElseIf fim = 2 Then
+    Mes = "maio"
+ElseIf fim = 3 Then
+    Mes = "junho"
+ElseIf fim = 4 Then
+    Mes = "julho"
+ElseIf fim = 5 Or fim = 6 Then
+    Mes = "agosto"
+ElseIf fim = 7 Then
+    Mes = "setembro"
+ElseIf fim = 8 Then
+    Mes = "outubro"
+Else
+    Mes = "novembro"
+
+End If
+End Function
+Function Velocidade(d, t) As Single
+Velocidade = d / t
+
+End Function
+
+Sub Potencia()
+Dim base As Integer
+Dim expoente As Integer
+Dim auxiliar As Integer
+Dim resultado As Long
+
+resultado = 1
+base = InputBox("Digite a base")
+expoente = InputBox("Digite o expoente")
+
+If expoente <> 0 Then
+    For auxiliar = 1 To expoente
+        resultado = base * resultado
+    Next
+    MsgBox ("O número " & base & " elevado a " & expoente & " é igual a " & resultado)
+Else
+
+End If
+End Sub
+Sub Aniversario()
+
+Dim dia As Date
+dia = InputBox("Digite o dia do aniversário neste ano")
+
+If dia >= DateValue(#3/21/2020#) And dia <= DateValue(#6/20/2020#) Then
+    MsgBox ("Você nasceu no outono")
+ElseIf dia >= DateValue(#6/21/2020#) And dia <= DateValue(#9/20/2020#) Then
+    MsgBox ("Você nasceu no inverno")
+ElseIf dia >= DateValue(#9/21/2020#) And dia <= DateValue(#12/20/2020#) Then
+    MsgBox ("Você nasceu no primeiro")
+Else
+    MsgBox ("Você nasceu no verão")
+
+End If
+End Sub
+
+Sub Tabuada()
+Dim cont As Byte
+Dim num As Byte
+Dim msg As String
+
+num = InputBox("Digite um número de 1 a 9")
+If num < 1 Or num > 9 Then
+    MsgBox ("Entrada inválida")
+Else
+    msg = "Tabuada do número " & num & Chr(13)
+    For cont = 1 To 9
+        msg = msg & num & " x " & cont & " = " & cont * num & Chr(13)
+        
+    Next
+        MsgBox (msg)
+
+End If
+End Sub
+
+Sub Licenciamento()
+Dim final As String
+
+final = InputBox("Digite o final da placa")
+
+Do While final < 0 Or final > 9
+    MsgBox ("Final inválido. Digite novamente.")
+Loop
+MsgBox "Mês do licenciamento: " & Mes(final)
+
+End Sub
+
+Sub Multa()
+Dim dist As Single, temp As Single, limite As Integer
+
+limite = InputBox("Informe o limite da via")
+dist = InputBox("Digite a distância")
+temp = InputBox("Digite o tempo")
+
+If Velocidade(dist, temp) <= limite Then
+    MsgBox "Sua velocidade é de " & Velocidade(dist, temp) & " km/h e está dentro do limite da via de " & limite & " km/h"
+Else
+    If Velocidade(dist, temp) / limite <= 1.2 Then
+        MsgBox "Sua velocidade é de " & Velocidade(dist, temp) & " km/h e está até 20% acima do limite da via de " & limite & " km/h" _
+        & Chr(13) & "Multa média - 3 pontos"
+    ElseIf Velocidade(dist, temp) / limite <= 1.5 Then
+        MsgBox "Sua velocidade é de " & Velocidade(dist, temp) & " km/h e está até 50% acima do limite da via de " & limite & " km/h" _
+        & Chr(13) & "Multa grave - 5 pontos"
+    Else
+        MsgBox "Sua velocidade é de " & Velocidade(dist, temp) & " km/h e está mais de 50% acima do limite da via de " & limite & " km/h" _
+        & Chr(13) & "Multa gravíssima - 7 pontos"
+    End If
+End If
+End Sub
